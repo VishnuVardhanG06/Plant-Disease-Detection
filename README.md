@@ -100,14 +100,14 @@ Disease Detection/
 | `Potato___Late_blight` | Potato Late Blight |
 | `Potato___healthy` | Healthy Potato |
 
-> The app automatically detects all sub-folders in [dataset/](cci:1://file:///c:/Users/Other/OneDrive/Desktop/Disease%20Detection/src/data_loader.py:50:0-106:38) as disease classes — add any new class folder and retrain.
+> The app automatically detects all sub-folders in `dataset/` as disease classes — add any new class folder and retrain.
 
 ---
 
 ## 🗂️ Dataset Setup
 
 1. Download the **PlantVillage dataset** from [Kaggle](https://www.kaggle.com/datasets/emmarex/plantdisease).
-2. Extract and copy the class folders into [dataset/](cci:1://file:///c:/Users/Other/OneDrive/Desktop/Disease%20Detection/src/data_loader.py:50:0-106:38):
+2. Extract and copy the class folders into `dataset/`:
 
 ```
 dataset/
@@ -118,7 +118,7 @@ dataset/
         ...
 ```
 
-> Each sub-folder name becomes the class label. Supported formats: `.jpg`, `.jpeg`, [.png](cci:7://file:///c:/Users/Other/OneDrive/Desktop/Disease%20Detection/reports/prediction_result.png:0:0-0:0), `.bmp`
+> Each sub-folder name becomes the class label. Supported formats: `.jpg`, `.jpeg`, `.png`, `.bmp`
 
 ---
 
@@ -163,16 +163,16 @@ py main.py
 
 | Step | Action |
 |---|---|
-| 1 | Load all images from [dataset/](cci:1://file:///c:/Users/Other/OneDrive/Desktop/Disease%20Detection/src/data_loader.py:50:0-106:38) |
+| 1 | Load all images from `dataset/` |
 | 2 | Resize → 128×128, grayscale, normalize |
 | 3 | Extract HOG feature vectors |
 | 4 | Encode labels and stratified 80/20 split |
 | 5 | Train Random Forest (200 trees) |
 | 6 | Train SVM (linear kernel) |
-| 7 | Evaluate both, save reports to [reports/](cci:1://file:///c:/Users/Other/OneDrive/Desktop/Disease%20Detection/src/evaluate_model.py:33:0-35:43) |
-| 8 | Save best model to [trained_models/best_model.pkl](cci:7://file:///c:/Users/Other/OneDrive/Desktop/Disease%20Detection/trained_models/best_model.pkl:0:0-0:0) |
+| 7 | Evaluate both, save reports to `reports/` |
+| 8 | Save best model to `trained_models/best_model.pkl` |
 
-> ⚡ **Tip:** SVM is set to `linear` kernel for fast training. Change `SVM_KERNEL` in [src/config.py](cci:7://file:///c:/Users/Other/OneDrive/Desktop/Disease%20Detection/src/config.py:0:0-0:0) if needed.
+> ⚡ **Tip:** SVM is set to `linear` kernel for fast training. Change `SVM_KERNEL` in `src/config.py` if needed.
 
 ---
 
@@ -215,7 +215,7 @@ Optional — specify a custom model path:
 py src/predict.py path/to/leaf_image.jpg --model trained_models/best_model.pkl
 ```
 
-The result image is saved to [reports/prediction_result.png](cci:7://file:///c:/Users/Other/OneDrive/Desktop/Disease%20Detection/reports/prediction_result.png:0:0-0:0).
+The result image is saved to `reports/prediction_result.png`.
 
 ---
 
@@ -248,14 +248,14 @@ Stratified 80/20 Train / Test Split
 
 ## 📊 Evaluation Outputs
 
-All generated automatically in [reports/](cci:1://file:///c:/Users/Other/OneDrive/Desktop/Disease%20Detection/src/evaluate_model.py:33:0-35:43):
+All generated automatically in `reports/`:
 
 | File | Description |
 |---|---|
-| [confusion_matrix_Random_Forest.png](cci:7://file:///c:/Users/Other/OneDrive/Desktop/Disease%20Detection/reports/confusion_matrix_Random_Forest.png:0:0-0:0) | Confusion matrix for RF |
-| [confusion_matrix_Support_Vector_Machine.png](cci:7://file:///c:/Users/Other/OneDrive/Desktop/Disease%20Detection/reports/confusion_matrix_Support_Vector_Machine.png:0:0-0:0) | Confusion matrix for SVM |
-| [model_accuracy_comparison.png](cci:7://file:///c:/Users/Other/OneDrive/Desktop/Disease%20Detection/reports/model_accuracy_comparison.png:0:0-0:0) | Side-by-side accuracy bar chart |
-| [prediction_result.png](cci:7://file:///c:/Users/Other/OneDrive/Desktop/Disease%20Detection/reports/prediction_result.png:0:0-0:0) | Input image with predicted label overlaid |
+| `confusion_matrix_Random_Forest.png` | Confusion matrix for RF |
+| `confusion_matrix_Support_Vector_Machine.png` | Confusion matrix for SVM |
+| `model_accuracy_comparison.png` | Side-by-side accuracy bar chart |
+| `prediction_result.png` | Input image with predicted label overlaid |
 
 ---
 
@@ -276,8 +276,8 @@ All generated automatically in [reports/](cci:1://file:///c:/Users/Other/OneDriv
 ## 📝 Notes
 
 - **No GPU required** — runs entirely on a standard laptop CPU
-- All hyperparameters are in [src/config.py](cci:7://file:///c:/Users/Other/OneDrive/Desktop/Disease%20Detection/src/config.py:0:0-0:0) — change once, applies everywhere
-- Adding new disease classes: create a new folder in [dataset/](cci:1://file:///c:/Users/Other/OneDrive/Desktop/Disease%20Detection/src/data_loader.py:50:0-106:38), retrain with `py main.py`, restart `py app.py`
+- All hyperparameters are in `src/config.py` — change once, applies everywhere
+- Adding new disease classes: create a new folder in `dataset/`, retrain with `py main.py`, restart `py app.py`
 
 ---
 

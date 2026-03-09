@@ -1,0 +1,35 @@
+# Environment
+.venv/
+venv/
+env/
+dist/
+build/
+*.egg-info/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Large Data & Models (Crucial for GitHub)
+dataset/
+trained_models/
+*.pkl
+*.pth
+*.h5
+*.onnx
+
+# Local reports
+reports/*.png
+reports/*.jpg
+reports/*.jpeg
+!reports/.gitkeep
+
+# System files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

@@ -1,0 +1,27 @@
+# Plant Disease Detection — Python Dependencies
+# Install all dependencies with:
+#   pip install -r requirements.txt
+
+# Core scientific computing
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Computer vision
+opencv-python>=4.8.0
+
+# Image processing & HOG feature extraction
+scikit-image>=0.21.0
+
+# Machine learning
+scikit-learn>=1.3.0
+
+# Visualization
+matplotlib>=3.7.0
+
+# Progress bars for long-running loops
+tqdm>=4.65.0
+
+# Web application server
+Flask>=3.0.0
+
+# (pickle is part of the Python standard library — no install needed)
