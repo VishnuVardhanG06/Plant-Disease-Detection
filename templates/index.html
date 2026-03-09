@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plant Disease Detection</title>
+  <meta name="description" content="AI-powered plant disease detection using machine learning. Upload a leaf image to instantly diagnose diseases." />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+
+  <!-- ── Animated Background Orbs ─────────────────────────────────────────── -->
+  <div class="bg-canvas" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- ── Header ─────────────────────────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo-mark">🌿</div>
+      <div>
+        <h1 class="site-title">Plant Disease Detection</h1>
+        <p class="site-subtitle">AI-powered diagnosis for healthier crops</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Main Layout ────────────────────────────────────────────────────────── -->
+  <main class="main-grid">
+
+    <!-- ─── LEFT: Upload Panel ──────────────────────────────────────────────── -->
+    <section class="panel upload-panel" id="upload-panel">
+      <h2 class="panel-title">Upload Leaf Image</h2>
+      <p class="panel-subtitle">Supports JPG, PNG, BMP · max 16 MB</p>
+
+      <!-- Drop Zone -->
+      <div class="drop-zone" id="drop-zone" role="button" tabindex="0" aria-label="Upload leaf image">
+        <div class="drop-icon">📷</div>
+        <p class="drop-primary">Drag &amp; drop your image here</p>
+        <p class="drop-secondary">or click to browse files</p>
+        <input type="file" id="file-input" accept="image/*" hidden />
+      </div>
+
+      <!-- Image Preview (hidden until file selected) -->
+      <div class="preview-wrap hidden" id="preview-wrap">
+        <img id="preview-img" class="preview-img" src="" alt="Leaf preview" />
+        <button class="btn-ghost" id="change-btn" type="button">↺ Change image</button>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-row">
+        <button class="btn-primary" id="predict-btn" disabled type="button">
+          <span id="btn-text">🔍&nbsp; Analyze Leaf</span>
+          <span id="btn-spinner" class="spinner hidden"></span>
+        </button>
+        <button class="btn-outline" id="reset-btn" type="button">✕&nbsp; Reset</button>
+      </div>
+    </section>
+
+    <!-- ─── RIGHT: Results Panel ─────────────────────────────────────────────── -->
+    <section class="panel results-panel hidden" id="results-panel" aria-live="polite">
+
+      <!-- Disease Header -->
+      <div class="result-header">
+        <div class="severity-dot" id="severity-dot"></div>
+        <div class="result-title-group">
+          <h2 class="disease-name" id="disease-name">—</h2>
+          <span class="severity-badge" id="severity-badge">—</span>
+        </div>
+      </div>
+
+      <!-- Confidence Ring -->
+      <div class="confidence-row">
+        <div class="ring-wrap">
+          <svg class="conf-ring" viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="ring-track" cx="60" cy="60" r="48" />
+            <circle class="ring-fill"  cx="60" cy="60" r="48" id="ring-fill" />
+          </svg>
+          <div class="ring-label">
+            <span class="conf-pct" id="conf-pct">0%</span>
+            <span class="conf-sub">confidence</span>
+          </div>
+        </div>
+        <div class="model-card">
+          <span class="model-label">ML Model</span>
+          <strong class="model-value">HOG + Classifier</strong>
+          <span class="model-label" style="margin-top:0.6rem">Disease</span>
+          <strong class="model-value disease-raw" id="disease-raw">—</strong>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <p class="disease-description" id="disease-description">—</p>
+
+      <!-- Tabs: Symptoms / Prevention / Treatment -->
+      <div class="tabs-wrap">
+        <div class="tab-bar" role="tablist">
+          <button class="tab-btn active" role="tab" data-tab="symptoms"   aria-selected="true">🔬 Symptoms</button>
+          <button class="tab-btn"        role="tab" data-tab="prevention" aria-selected="false">🛡 Prevention</button>
+          <button class="tab-btn"        role="tab" data-tab="treatment"  aria-selected="false">💊 Treatment</button>
+        </div>
+        <ul class="tip-list" id="tip-list"></ul>
+      </div>
+
+    </section>
+
+    <!-- ─── Error Panel ────────────────────────────────────────────────────── -->
+    <section class="panel error-panel hidden" id="error-panel">
+      <div class="error-icon">⚠️</div>
+      <h3 id="error-title">Something went wrong</h3>
+      <p  id="error-msg">Please try again with a clear leaf image.</p>
+      <button class="btn-primary" id="error-retry-btn" type="button">↺ Try Again</button>
+    </section>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Plant Disease Detection &mdash; Classical ML with HOG + Random Forest &amp; SVM</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
